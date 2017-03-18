@@ -1,0 +1,22 @@
+language: go
+go:
+  - 1.6
+  - 1.7.5
+  - 1.8
+  - master
+sudo: required
+
+install:
+  - export PATH=$PATH:$HOME/gopath/bin
+  - go env
+  - go get github.com/mattn/goveralls
+  - go get github.com/tools/godep
+  - go get github.com/hawkingrei/golang_design_pattern
+before_script: 
+  - go get && make all 
+script:
+  - go  test -v ./...
+
+after_success:
+  - go test 
+  - $HOME/gopath/bin/goveralls -repotoken 4gYjUjBmssKuQHB9zz4Z3X3GJ7uL6uT4E 
